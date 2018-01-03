@@ -3,4 +3,14 @@ resources:
 - name: repo
   type: git
   source:
-    uri: 
+    uri: {{github-repository}}
+    branch: master
+    private_key: {{github-private-key}}
+
+jobs:
+- name: test
+  plan:
+  - get: repo
+    trigger: true
+  - task: test
+    file: repo/ci/test.yml
